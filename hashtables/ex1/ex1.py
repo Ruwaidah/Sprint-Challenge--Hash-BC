@@ -30,4 +30,6 @@ def print_answer(answer):
 
 
 weights_3 = [4, 6, 10, 15, 16]
+name = "ruwaidahalfakhri"
+print(name[len(name)-5:])
 print(get_indices_of_item_weights(weights_3, 5, 21))
