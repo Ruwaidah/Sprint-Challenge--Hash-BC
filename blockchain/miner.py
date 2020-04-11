@@ -25,6 +25,10 @@ def proof_of_work(last_proof):
     print("Searching for next proof")
     proof = 0
     #  TODO: Your code here
+    last_hash = hashlib.sha256(f"{last_proof}".encode()).hexdigest()
+
+    while not valid_proof(last_hash, proof):
+        proof += random.random()
 
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
@@ -35,12 +39,14 @@ def valid_proof(last_hash, proof):
     Validates the Proof:  Multi-ouroborus:  Do the last five characters of
     the hash of the last proof match the first five characters of the hash
     of the new proof?
-
     IE:  last_hash: ...AE912345, new hash 12345E88...
     """
 
     # TODO: Your code here!
-    pass
+    guess = f"{proof}".encode()
+    guess_hash = hashlib.sha256(guess).hexdigest()
+
+    return guess_hash[:5] == last_hash[-5:]
 
 
 if __name__ == '__main__':
